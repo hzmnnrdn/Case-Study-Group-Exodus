@@ -1,0 +1,61 @@
+const readline = require('readline');
+
+const inp = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+/*
+[A parcel management system.]
+
+REQUIREMENTS
+    1. It contains 30 empty slots for storage.
+    2. Each slot can only store any item for 2 days only.
+    3. Uncollected parcel will be returned to sender after 2 days.
+    4. Item is stored based on house number.
+    5. Each storage can store a maximum of 5 parcels.
+*/
+
+
+inp.question('Enter house number    :  ', (s) => { //INPUT HOUSE NUMBER (30  SLOTS= 30 HOUSES)
+
+    inp.question('Enter parcel          :  ', (p) => { //INPUT parcel (maximum is 5 parcel per slot)
+
+        if ((p>5)||(s>30)){
+            console.log("Invalid input. Maximum number of parcel is 5 only la"); 
+         }
+
+        else{
+            console.log("___________________________________________________");
+            //get system date
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth()+1;
+            const yyyy = today.getFullYear();
+            let hr = today.getHours();
+            let min = today.getMinutes();
+            let sec = today.getSeconds();
+        
+            let enter  = new Date(today); // starting date
+            //let end = new Date(new Date(dateTime).getTime() + 2*24*60*60* 1000); // ending date=starting date + 2 days
+            var date2 = new Date();
+            date2.setDate(date2.getDate()+2);
+            let end = date2;
+            let slot=s; // house number/storage slots
+            let parcel=p; //parcel
+  
+             //check 
+             console.log("Parcel delivered on         : " +enter); //print starting date&time
+             console.log("Parcel will be returned on  : " +end); //print starting date&time
+             console.log("House Number : " +slot); //print slot 
+             console.log("Parcel input : " +parcel); //print parcel 
+             console.log("======================================================");
+ 
+             let storage = [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], [0,1,2,3,4]]; // storage array = [[slot number],[0(starting),1(ending)]] (size of array =[30][2])
+             storage[slot-1][0]=enter; // [slot number][starting time&date]
+             storage[slot-1][1]=end;   //slot number][ending time&date)]
+
+        }      
+              inp.close();
+        });
+ });
